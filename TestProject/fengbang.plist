@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>navigation</key>
+	<dict>
+		<key>rightbuttons</key>
+		<array>
+			<dict>
+				<key>openurl</key>
+				<string></string>
+				<key>image</key>
+				<string></string>
+			</dict>
+			<dict>
+				<key>openurl</key>
+				<string></string>
+				<key>image</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>leftbuttons</key>
+		<array>
+			<dict>
+				<key>openurl</key>
+				<string></string>
+				<key>image</key>
+				<string></string>
+			</dict>
+		</array>
+	</dict>
+	<key>data</key>
+	<array>
+		<dict>
+			<key>scrolltime</key>
+			<string>轮播时间</string>
+			<key>meterial</key>
+			<array>
+				<dict>
+					<key>image</key>
+					<string></string>
+					<key>openurl</key>
+					<string></string>
+				</dict>
+				<dict>
+					<key>openurl</key>
+					<string>跳转链接</string>
+					<key>image</key>
+					<string>url</string>
+				</dict>
+			</array>
+			<key>type</key>
+			<string>banner</string>
+		</dict>
+		<dict>
+			<key>meterial</key>
+			<array/>
+			<key>type</key>
+			<string>产品列表</string>
+		</dict>
+	</array>
+	<key>message</key>
+	<string>success</string>
+	<key>code</key>
+	<string>200</string>
+</dict>
+</plist>
