@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface VideoRecordViewController : UIViewController
-
+-(instancetype)initWithVideoName:(NSString*)name;
 @end

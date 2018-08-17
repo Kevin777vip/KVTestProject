@@ -13,6 +13,9 @@
 #import "VideoRecordViewController.h"
 #import <ReactiveObjC.h>
 #import "KVVideoRecorder.h"
+#import "FBCardModel.h"
+#import "HomePageModel.h"
+#import "KVTextField.h"
 @interface ViewController ()
 @property (nonatomic,strong)CAShapeLayer *testShaplayer;
 @property (nonatomic,strong)KVVideoRecorder *recorder;
@@ -32,7 +35,83 @@
 //    NSLog(@"%@",[DeviceIPAddress getIPAddress:YES]);
 //    [self simCard];
 //    [self testFunction];
-    [self testVideoRecord];
+//    [self testVideoRecord];
+    
+    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(50, 100, 100, 40)];
+    [button setTitle:@"测试app间跳转" forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(__kindof UIControl * _Nullable x) {
+        if (x) {
+//            [self testOpenurl];
+//            [self testRequest];
+            [self testJumpToVideo];
+        }
+    }];
+    [self.view addSubview:button];
+}
+
+-(void)testJumpToVideo{
+    VideoRecordViewController *vc = [[VideoRecordViewController alloc]initWithVideoName:@"abc"];
+    [self.navigationController pushViewController:vc animated:YES];
+    
+}
+
+-(void)testTextField{
+    KVTextField *field = [[KVTextField alloc]initWithFrame:CGRectMake(0, 180, 200, 40)];
+    field.backgroundColor = [UIColor greenColor];
+    field.kv_allowTextLength = 5;
+    [self.view addSubview:field];
+    
+    KVTextField *fieldw = [[KVTextField alloc]initWithFrame:CGRectMake(0, 180+60, 200, 40)];
+    fieldw.backgroundColor = [UIColor yellowColor];
+    fieldw.kv_allowTextLength = 15;
+    [self.view addSubview:fieldw];
+}
+
+-(void)testRequest{
+    NSString *urlStr = @"http://172.16.15.62:8484/faceSignRecord/saveFaceSignRecord";
+    urlStr = [urlStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlStr]];
+    request.HTTPMethod = @"POST";
+    NSMutableDictionary *dict = [[NSMutableDictionary alloc]init];
+    [dict setObject:@"123456" forKey:@"faceId"];
+    [dict setObject:@"18618310772" forKey:@"creater"];
+
+    NSMutableArray *array = [[NSMutableArray alloc]init];
+    for (int i = 0; i<dict.allKeys.count; i++) {
+        NSString *key = dict.allKeys[i];
+        NSString *vaule = [dict objectForKey:key];
+        [array addObject:[NSString stringWithFormat:@"%@=%@",key,vaule]];
+    }
+    NSString *formStr = [array componentsJoinedByString:@"&"];
+    
+    request.HTTPBody = [formStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSURLSession *session = [NSURLSession sharedSession];
+    
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSLog(@"%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    }];
+    
+    [task resume];
+}
+
+-(void)testOpenurl{
+    NSURL *url = [NSURL URLWithString:@"FBFaceSign://"];
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        [[UIApplication sharedApplication] openURL:url];
+    }
+}
+
+- (void)testModels{
+    NSDictionary *dict = [[NSDictionary alloc]initWithObjectsAndKeys:@"a",@"msg", nil];
+    HomePageModel *home = [[HomePageModel alloc]initWithDictionary:dict error:nil];
+
+    if (home.data.abcd) {
+        NSLog(@"has");
+    }else{
+        NSLog(@"no");
+    }
 }
 
 - (void)testVideoRecord {
@@ -49,9 +128,9 @@
             self.recorder = [[KVVideoRecorder alloc]initWithPresentView:self.view];
 //            [self.recorder configRecordingLabelWithText:@"请大声朗读：一二三四五六七"];
             [self.recorder startRecordingWithFileName:@"09090"];
-            self.recorder.finishedBlock = ^(NSInteger recordedDuration, NSError *error) {
-                NSLog(@"finished:%ld",(long)recordedDuration);
-            };
+//            self.recorder.finishedBlock = ^(NSInteger recordedDuration, NSError *error) {
+//                NSLog(@"finished:%ld",(long)recordedDuration);
+//            };
 
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 NSLog(@"6.....");

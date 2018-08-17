@@ -7,103 +7,59 @@
 //
 
 #import "VideoRecordViewController.h"
-@import AVKit;
-@interface VideoRecordViewController ()<AVCaptureFileOutputRecordingDelegate>
-@property (nonatomic,strong)AVCaptureSession *session;
-@property (nonatomic,strong)AVCaptureDevice *videoCaptureDevice;
-@property (nonatomic,strong)AVCaptureDevice *audioCaptureDevice;
-@property (nonatomic,strong)AVCaptureDeviceInput *videoInput;
-@property (nonatomic,strong)AVCaptureDeviceInput *audioInput;
-@property (nonatomic,strong)AVCaptureMovieFileOutput *fileOutput;
-@property (nonatomic,strong)AVCaptureVideoPreviewLayer *videoPreviewLayer;
-@property (nonatomic,strong)UILabel *textLabel;
+#import "KVVideoRecorder.h"
+@interface VideoRecordViewController ()
+@property (nonatomic,strong)KVVideoRecorder *recorder;
+@property (nonatomic,copy) NSString *fileName;
+@property (nonatomic,strong) UIView *videoView;
+@property (nonatomic,strong) UIView *bottomView;
+@property (nonatomic,strong) UIButton *recordButton;
 @end
 
 @implementation VideoRecordViewController
 
-- (void)viewDidLoad {
+-(instancetype)initWithVideoName:(NSString*)name{
+    self = [super init];
+    if (self) {
+        _fileName = name;
+    }
+    return self;
+}
+
+-(void)viewDidLoad{
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
-    [self configCamera];
-    [self startRecordingWithFileName:@"1212"];
+    [self configUI];
 }
 
-- (void)configCamera {
-    _session = [[AVCaptureSession alloc]init];
-    if ([_session canSetSessionPreset:AVCaptureSessionPreset640x480]) {
-        _session.sessionPreset = AVCaptureSessionPreset640x480;
-    }
-    
-    _videoPreviewLayer = [[AVCaptureVideoPreviewLayer alloc]initWithSession:_session];
-    _videoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
-    _videoPreviewLayer.frame = self.view.bounds;
-    [self.view.layer addSublayer:_videoPreviewLayer];
-    
-    _videoCaptureDevice = [self cameraWithPosition:AVCaptureDevicePositionFront];
-    _videoInput = [[AVCaptureDeviceInput alloc]initWithDevice:_videoCaptureDevice error:nil];
-    if ([_session canAddInput:_videoInput]) {
-        [_session addInput:_videoInput];
-        _videoPreviewLayer.connection.videoOrientation = AVCaptureVideoOrientationPortrait;
-    }
-    
-    _audioCaptureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
-    _audioInput = [[AVCaptureDeviceInput alloc]initWithDevice:_audioCaptureDevice error:nil];
-    if ([_session canAddInput:_audioInput]) {
-        [_session addInput:_audioInput];
-    }
-    
-    _fileOutput = [[AVCaptureMovieFileOutput alloc]init];
-    AVCaptureConnection *captureConnection = [_fileOutput connectionWithMediaType:AVMediaTypeVideo];
-    if ([captureConnection isVideoStabilizationSupported]) {
-        captureConnection.preferredVideoStabilizationMode = AVCaptureVideoStabilizationModeAuto;
-    }
-    captureConnection.videoOrientation = AVCaptureVideoOrientationPortrait;
-//    _fileOutput.connections = [[NSArray alloc]initWithObjects:captureConnection,nil];
-    
-    if ([_session canAddOutput:_fileOutput]) {
-        [_session addOutput:_fileOutput];
-    }
-    
-    if (![_videoPreviewLayer.connection isEnabled]) {
-        [_videoPreviewLayer.connection setEnabled:YES];
-    }
-    
+-(void)configUI{
+    _videoView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height-200)];
+    [self.view addSubview:_videoView];
+    _bottomView = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.frame.size.height-200, self.view.frame.size.width, 200)];
+    [self.view addSubview:_bottomView];
+    [self configVideoView];
+    [self configBottomView];
 }
 
--(void)startRecordingWithFileName:(NSString*)name {
-    [_session startRunning];
-
-    NSURL *fileUrl = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-    NSURL *outputURL = [[fileUrl URLByAppendingPathComponent:name] URLByAppendingPathExtension:@"mov"];
-    [_fileOutput startRecordingToOutputFileURL:outputURL recordingDelegate:self];
-    
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(10 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [_session stopRunning];
-        _session = nil;
-    });
-    
-    _textLabel = [[UILabel alloc]initWithFrame:CGRectMake(0,self.view.frame.size.height - 40, self.view.frame.size.width, 40)];
-    _textLabel.textColor = [UIColor blackColor];
-    _textLabel.numberOfLines = 0;
-    _textLabel.text = @"一二三四五六七八，请跟我读";
-    [self.view addSubview:_textLabel];
+-(void)configVideoView{
+    self.recorder = [[KVVideoRecorder alloc]initWithPresentView:_videoView];
+    //if
+    [self.recorder startRecordingWithFileName:_fileName];
+    self.recorder.finishedBlock = ^(NSInteger recordedDuration, NSError *error, NSURL *fileURL) {
+        //
+        NSLog(@"fileurl:%@",fileURL);
+    };
 }
 
-- (AVCaptureDevice *)cameraWithPosition:(AVCaptureDevicePosition) position
-{
-    NSArray *devices = [AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo];
-    for (AVCaptureDevice *device in devices) {
-        if (device.position == position) return device;
-    }
-    return nil;
+-(void)configBottomView{
+    _recordButton = [[UIButton alloc]initWithFrame:CGRectMake(0, 40, 20, 20)];
+    _recordButton.backgroundColor = [UIColor redColor];
+    [_recordButton addTarget:self action:@selector(stopVideo) forControlEvents:UIControlEventTouchUpInside];
+    [_bottomView addSubview:_recordButton];
 }
 
-#pragma mark - delegate
--(void)captureOutput:(AVCaptureFileOutput *)output didStartRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray<AVCaptureConnection *> *)connections {
-    
+-(void)stopVideo{
+    [self.recorder stopCapture];
 }
 
--(void)captureOutput:(AVCaptureFileOutput *)output didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray<AVCaptureConnection *> *)connections error:(NSError *)error {
-    NSLog(@"finish");
-}
 @end

@@ -6,4 +6,5 @@ target ’TestProject’ do
 #pod 'KVNetWorking'
 pod 'ZFPlayer'
 pod 'ReactiveObjC'
+pod 'JSONModel'
 end

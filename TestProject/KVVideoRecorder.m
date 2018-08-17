@@ -61,11 +61,12 @@
     }
     
     _fileOutput = [[AVCaptureMovieFileOutput alloc]init];
-    AVCaptureConnection *captureConnection = [_fileOutput connectionWithMediaType:AVMediaTypeVideo];
-    if ([captureConnection isVideoStabilizationSupported]) {
-        captureConnection.preferredVideoStabilizationMode = AVCaptureVideoStabilizationModeAuto;
-    }
-    captureConnection.videoOrientation = AVCaptureVideoOrientationPortrait;
+    _fileOutput.movieFragmentInterval = kCMTimeInvalid;
+//    AVCaptureConnection *captureConnection = [_fileOutput connectionWithMediaType:AVMediaTypeVideo];
+//    if ([captureConnection isVideoStabilizationSupported]) {
+//        captureConnection.preferredVideoStabilizationMode = AVCaptureVideoStabilizationModeAuto;
+//    }
+//    captureConnection.videoOrientation = AVCaptureVideoOrientationPortrait;
     //    _fileOutput.connections = [[NSArray alloc]initWithObjects:captureConnection,nil];
     
     if ([_session canAddOutput:_fileOutput]) {
@@ -123,7 +124,7 @@
 -(void)captureOutput:(AVCaptureFileOutput *)output didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray<AVCaptureConnection *> *)connections error:(NSError *)error {
     if (_finishedBlock) {
         NSInteger second = CMTimeGetSeconds(output.recordedDuration);
-        _finishedBlock(second,error);
+        _finishedBlock(second,error,outputFileURL);
     }
 }
 

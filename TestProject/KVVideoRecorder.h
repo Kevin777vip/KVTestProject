@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-typedef void(^RecordingFinishedBlock)(NSInteger recordedDuration,NSError *error);
+typedef void(^RecordingFinishedBlock)(NSInteger recordedDuration,NSError *error,NSURL *fileURL);
 typedef void(^RecordingStartedBlock)(void);
 @import AVKit;
 @interface KVVideoRecorder : NSObject
