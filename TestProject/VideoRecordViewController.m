@@ -74,8 +74,11 @@
 }
 
 -(void)stopVideo{
-    [self.recorder stopCapture];
+//    [self.recorder stopCapture];
     [self startVoice];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(16 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.recorder stopCapture];
+    });
 }
 
 -(void)startVoice{
@@ -85,7 +88,7 @@
     speech.rate = 0.5;
     speech.pitchMultiplier = 1;
     
-    AVSpeechSynthesisVoice *lauguage = [AVSpeechSynthesisVoice voiceWithLanguage:@"zh-CN"];
+    AVSpeechSynthesisVoice *lauguage = [AVSpeechSynthesisVoice voiceWithLanguage:@"zh-CN"];//zh-CN  en-us
     speech.voice = lauguage;
     
     [_voice speakUtterance:speech];

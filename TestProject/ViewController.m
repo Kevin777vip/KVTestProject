@@ -16,9 +16,14 @@
 #import "FBCardModel.h"
 #import "HomePageModel.h"
 #import "KVTextField.h"
-@interface ViewController ()
+#import "KVVideoPlayer.h"
+#import "VoiceRecognizeViewController.h"
+@interface ViewController ()<UITextFieldDelegate>
 @property (nonatomic,strong)CAShapeLayer *testShaplayer;
 @property (nonatomic,strong)KVVideoRecorder *recorder;
+@property (nonatomic,strong)UIView *testView;
+@property (nonatomic,strong)KVVideoPlayer *player;
+
 @end
 
 @implementation ViewController
@@ -44,10 +49,76 @@
         if (x) {
 //            [self testOpenurl];
 //            [self testRequest];
-            [self testJumpToVideo];
+//            [self testJumpToVideo];
+//            [self testThread];
+//            [self testVideoPlayer];
+//            [self testabs];
+            [self testVoiceToText];
         }
     }];
     [self.view addSubview:button];
+//    [self testTextField];
+    [self configTestView];
+}
+
+-(void)testVoiceToText{
+    VoiceRecognizeViewController *vc =[[VoiceRecognizeViewController alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void)testabs{
+    float a = 186.2;
+    float b = 1875;
+    
+    NSLog(@"ABS:%f",ABS(a-b));
+    NSLog(@"abs:%f",fabsf(a-b));
+    
+}
+
+-(void)configTestView{
+    _testView = [[UIView alloc]initWithFrame:CGRectMake(0, 200, self.view.frame.size.width, 400)];
+    _testView.backgroundColor = [UIColor greenColor];
+    [self.view addSubview:_testView];
+}
+
+-(void)testVideoPlayer{
+    _player = [[KVVideoPlayer alloc]initWithView:_testView];
+    [_player setVideoWithUrl:nil];
+    
+//    [self addChildViewController:_player.playerController];
+//    [_testView addSubview:_player.playerController.view];
+}
+
+
+-(void)testThread{
+    NSLog(@"clicked");
+    
+    
+    dispatch_queue_t concurrentQueue =dispatch_queue_create("com.kevin.efgh", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_queue_t serialQueue =dispatch_queue_create("com.kevin.efgh", DISPATCH_QUEUE_SERIAL);
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_group_enter(group);
+    dispatch_group_async(group, serialQueue, ^{
+        //执行第一个任务
+        NSLog(@"1:%@",[NSThread currentThread]);
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.5 * NSEC_PER_SEC)), concurrentQueue, ^{
+            NSLog(@"finish 1:%@",[NSThread currentThread]);
+            dispatch_group_leave(group);
+        });
+    });
+    dispatch_group_enter(group);
+    dispatch_group_async(group, serialQueue, ^{
+        NSLog(@"2:%@",[NSThread currentThread]);
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3.5 * NSEC_PER_SEC)), concurrentQueue, ^{
+            NSLog(@"finish 2:%@",[NSThread currentThread]);
+            dispatch_group_leave(group);
+        });
+    });
+    
+    dispatch_group_notify(group,dispatch_get_main_queue(), ^{
+        //group 中的任务执行完
+        NSLog(@"abc");
+    });
 }
 
 -(void)testJumpToVideo{
@@ -57,8 +128,10 @@
 }
 
 -(void)testTextField{
-    KVTextField *field = [[KVTextField alloc]initWithFrame:CGRectMake(0, 180, 200, 40)];
+    KVTextField *field = [[KVTextField alloc]init];
+    field.frame = CGRectMake(0, 180, 200, 40);
     field.backgroundColor = [UIColor greenColor];
+    field.delegate  = self;
     field.kv_allowTextLength = 5;
     [self.view addSubview:field];
     
@@ -281,9 +354,9 @@
     [NSThread sleepForTimeInterval:2];
     NSLog(@"finish");
     
-    //主线程，串行
+    //主线程
     dispatch_queue_t mainQueue = dispatch_get_main_queue();
-    //全局队列，并行
+    //全局队列
     dispatch_queue_t globalQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
     
     //自定义串行

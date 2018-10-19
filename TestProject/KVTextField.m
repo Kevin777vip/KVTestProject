@@ -15,22 +15,31 @@
 
 -(instancetype)initWithFrame:(CGRect)frame{
     if (self = [super initWithFrame:frame]) {
-        self.delegate = self;
+        [self setUpNoti];
     }
     return self;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    if (self.kv_allowTextLength>0) {
-        if (range.length == 1 && string.length == 0) {
-            return YES;
-        }
-        else if (textField.text.length >= self.kv_allowTextLength) {
-            textField.text = [textField.text substringToIndex:self.kv_allowTextLength];
-            return NO;
-        }
+-(instancetype)init{
+    if (self = [super init]) {
+        [self setUpNoti];
     }
-    return YES;
+    return self;
 }
 
+-(void)setUpNoti{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkTextLimit) name:UITextFieldTextDidChangeNotification object:nil];
+}
+
+-(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+-(void)checkTextLimit{
+    if (self.kv_allowTextLength>0) {
+        if (self.text.length >= self.kv_allowTextLength) {
+            self.text = [self.text substringToIndex:self.kv_allowTextLength];
+        }
+    }
+}
 @end
