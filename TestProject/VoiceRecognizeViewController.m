@@ -104,7 +104,7 @@
             NSLog(@"useless");
         }
     }else{
-        NSLog(@"error:%@",error);
+        NSLog(@"error0:%@",error);
     }
     
     _recongizerRequest = [[SFSpeechAudioBufferRecognitionRequest alloc]init];
@@ -125,9 +125,9 @@
         }
         [self dealResult:result];
         if (error) {
-            NSLog(@"error:%@",error);
+            NSLog(@"error1:%@",error);
             [self.audioEngine stop];
-            [inputNode removeTapOnBus:0];
+//            [inputNode removeTapOnBus:0];
             self.recongizerRequest = nil;
             self.recongitionTask = nil;
         }
