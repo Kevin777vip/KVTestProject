@@ -91,6 +91,7 @@
         _audioEngine = [[AVAudioEngine alloc]init];
     }
     
+    //要不要无所谓
     AVAudioSession *session = [AVAudioSession sharedInstance];
     NSError *error;
     BOOL useful = YES;
@@ -106,7 +107,7 @@
     }else{
         NSLog(@"error0:%@",error);
     }
-    
+    //没有也行
     _recongizerRequest = [[SFSpeechAudioBufferRecognitionRequest alloc]init];
     AVAudioInputNode *inputNode = _audioEngine.inputNode;
     if (!inputNode) {
