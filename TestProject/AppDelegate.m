@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import <Aspects.h>
 @interface AppDelegate ()
 
 @end
@@ -17,7 +17,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [self setUpWatcher];
     return YES;
+}
+
+-(void)setUpWatcher {
+    [UIViewController aspect_hookSelector:NSSelectorFromString(@"dealloc") withOptions:AspectPositionBefore usingBlock:^(id<AspectInfo> info){
+        NSLog(@"!!!!!vc dealloc!!!!!:  %@",info.instance);
+    } error:nil];
 }
 
 

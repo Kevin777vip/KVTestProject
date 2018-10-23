@@ -7,4 +7,5 @@ target ’TestProject’ do
 pod 'ZFPlayer'
 pod 'ReactiveObjC'
 pod 'JSONModel'
+pod 'Aspects'
 end
