@@ -17,6 +17,7 @@
 		2509C2372040EEC60054B15F /* TestProjectUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2509C2362040EEC60054B15F /* TestProjectUITests.m */; };
 		252B328F20E4D22800B0AC0E /* DeviceIPAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = 252B328E20E4D22800B0AC0E /* DeviceIPAddress.m */; };
 		2535E17A21255F020011BA79 /* KVTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 2535E17921255F020011BA79 /* KVTextField.m */; };
+		255D544E22E7F2DB008CB02D /* TestTableVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 255D544D22E7F2DB008CB02D /* TestTableVC.m */; };
 		2563F4302133C80E001BF443 /* KVVideoPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2563F42F2133C80E001BF443 /* KVVideoPlayerView.m */; };
 		2563F4332133D04D001BF443 /* KVVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 2563F4322133D04D001BF443 /* KVVideoPlayer.m */; };
 		25A1005020A1364D00DB86A4 /* fengbang.plist in Resources */ = {isa = PBXBuildFile; fileRef = 25A1004F20A1364D00DB86A4 /* fengbang.plist */; };
@@ -25,6 +26,9 @@
 		25C7B387210F1A4A00E8B586 /* FBCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C7B386210F1A4A00E8B586 /* FBCardModel.m */; };
 		25C7B38A210F1A5800E8B586 /* HomePageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 25C7B388210F1A5800E8B586 /* HomePageModel.m */; };
 		25CD754221796E88000D0927 /* VoiceRecognizeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25CD754121796E88000D0927 /* VoiceRecognizeViewController.m */; };
+		25D30A682366936B0023E8FA /* abc.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 25D30A672366936B0023E8FA /* abc.jpg */; };
+		25D30A6C236695360023E8FA /* scan.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 25D30A6B236695360023E8FA /* scan.jpg */; };
+		25D30A6F236804260023E8FA /* VideoChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25D30A6E236804260023E8FA /* VideoChatViewController.m */; };
 		65A63B2AE7A74F4F1AD1A393 /* libPods-TestProject.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 08F3B2BDFB27176C3DD68801 /* libPods-TestProject.a */; };
 /* End PBXBuildFile section */
 
@@ -67,6 +71,8 @@
 		252B328E20E4D22800B0AC0E /* DeviceIPAddress.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DeviceIPAddress.m; sourceTree = "<group>"; };
 		2535E17821255F020011BA79 /* KVTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KVTextField.h; sourceTree = "<group>"; };
 		2535E17921255F020011BA79 /* KVTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KVTextField.m; sourceTree = "<group>"; };
+		255D544C22E7F2DB008CB02D /* TestTableVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestTableVC.h; sourceTree = "<group>"; };
+		255D544D22E7F2DB008CB02D /* TestTableVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestTableVC.m; sourceTree = "<group>"; };
 		2563F42E2133C80E001BF443 /* KVVideoPlayerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KVVideoPlayerView.h; sourceTree = "<group>"; };
 		2563F42F2133C80E001BF443 /* KVVideoPlayerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KVVideoPlayerView.m; sourceTree = "<group>"; };
 		2563F4312133D04D001BF443 /* KVVideoPlayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KVVideoPlayer.h; sourceTree = "<group>"; };
@@ -82,6 +88,10 @@
 		25C7B389210F1A5800E8B586 /* HomePageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageModel.h; sourceTree = "<group>"; };
 		25CD754021796E88000D0927 /* VoiceRecognizeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VoiceRecognizeViewController.h; sourceTree = "<group>"; };
 		25CD754121796E88000D0927 /* VoiceRecognizeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VoiceRecognizeViewController.m; sourceTree = "<group>"; };
+		25D30A672366936B0023E8FA /* abc.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = abc.jpg; sourceTree = "<group>"; };
+		25D30A6B236695360023E8FA /* scan.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = scan.jpg; sourceTree = "<group>"; };
+		25D30A6D236804260023E8FA /* VideoChatViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoChatViewController.h; sourceTree = "<group>"; };
+		25D30A6E236804260023E8FA /* VideoChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoChatViewController.m; sourceTree = "<group>"; };
 		29D22A426F2529615051D729 /* Pods-TestProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestProject.release.xcconfig"; path = "Pods/Target Support Files/Pods-TestProject/Pods-TestProject.release.xcconfig"; sourceTree = "<group>"; };
 		E8CDB4AE5957B8F53D806A04 /* Pods-TestProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestProject.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TestProject/Pods-TestProject.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,8 +153,14 @@
 				25C7B386210F1A4A00E8B586 /* FBCardModel.m */,
 				25C7B389210F1A5800E8B586 /* HomePageModel.h */,
 				25C7B388210F1A5800E8B586 /* HomePageModel.m */,
+				25D30A6B236695360023E8FA /* scan.jpg */,
+				25D30A672366936B0023E8FA /* abc.jpg */,
 				2509C2152040EEC60054B15F /* ViewController.h */,
 				2509C2162040EEC60054B15F /* ViewController.m */,
+				25D30A6D236804260023E8FA /* VideoChatViewController.h */,
+				25D30A6E236804260023E8FA /* VideoChatViewController.m */,
+				255D544C22E7F2DB008CB02D /* TestTableVC.h */,
+				255D544D22E7F2DB008CB02D /* TestTableVC.m */,
 				25CD754021796E88000D0927 /* VoiceRecognizeViewController.h */,
 				25CD754121796E88000D0927 /* VoiceRecognizeViewController.m */,
 				2535E17821255F020011BA79 /* KVTextField.h */,
@@ -216,6 +232,7 @@
 				2509C20C2040EEC60054B15F /* Frameworks */,
 				2509C20D2040EEC60054B15F /* Resources */,
 				A4329BEC379AC6A3456BF5B7 /* [CP] Copy Pods Resources */,
+				71107BAB847BD8645C1BFF81 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -315,6 +332,8 @@
 				2509C21F2040EEC60054B15F /* LaunchScreen.storyboard in Resources */,
 				2509C21C2040EEC60054B15F /* Assets.xcassets in Resources */,
 				25A1005020A1364D00DB86A4 /* fengbang.plist in Resources */,
+				25D30A682366936B0023E8FA /* abc.jpg in Resources */,
+				25D30A6C236695360023E8FA /* scan.jpg in Resources */,
 				2509C21A2040EEC60054B15F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -354,13 +373,31 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		71107BAB847BD8645C1BFF81 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TestProject/Pods-TestProject-frameworks.sh",
+				"${PODS_ROOT}/AliRTCSdk/AliRTCSdk.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AliRTCSdk.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TestProject/Pods-TestProject-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A4329BEC379AC6A3456BF5B7 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TestProject/Pods-TestProject-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-TestProject/Pods-TestProject-resources.sh",
 				"${PODS_ROOT}/ZFPlayer/ZFPlayer/ZFPlayer.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -369,7 +406,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TestProject/Pods-TestProject-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TestProject/Pods-TestProject-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -385,9 +422,11 @@
 				25C7B38A210F1A5800E8B586 /* HomePageModel.m in Sources */,
 				2509C2172040EEC60054B15F /* ViewController.m in Sources */,
 				25C7B3702105A6CB00E8B586 /* VideoRecordViewController.m in Sources */,
+				255D544E22E7F2DB008CB02D /* TestTableVC.m in Sources */,
 				25C7B387210F1A4A00E8B586 /* FBCardModel.m in Sources */,
 				2563F4332133D04D001BF443 /* KVVideoPlayer.m in Sources */,
 				2509C2222040EEC60054B15F /* main.m in Sources */,
+				25D30A6F236804260023E8FA /* VideoChatViewController.m in Sources */,
 				2509C2142040EEC60054B15F /* AppDelegate.m in Sources */,
 				2563F4302133C80E001BF443 /* KVVideoPlayerView.m in Sources */,
 				252B328F20E4D22800B0AC0E /* DeviceIPAddress.m in Sources */,

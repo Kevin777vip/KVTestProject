@@ -8,4 +8,6 @@ pod 'ZFPlayer'
 pod 'ReactiveObjC'
 pod 'JSONModel'
 pod 'Aspects'
+pod 'AliRTCSdk'
+pod 'TXLiteAVSDK_TRTC', :podspec => 'http://pod-1252463788.cosgz.myqcloud.com/liteavsdkspec/TXLiteAVSDK_TRTC.podspec'
 end

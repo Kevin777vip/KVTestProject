@@ -18,6 +18,8 @@
 #import "KVTextField.h"
 #import "KVVideoPlayer.h"
 #import "VoiceRecognizeViewController.h"
+#import "TestTableVC.h"
+
 @interface ViewController ()<UITextFieldDelegate>
 @property (nonatomic,strong)CAShapeLayer *testShaplayer;
 @property (nonatomic,strong)KVVideoRecorder *recorder;
@@ -31,6 +33,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    
+    NSBundle *mainBundle = [NSBundle mainBundle];
+    NSString * path =  [mainBundle pathForResource:@"scan" ofType:@"jpg"];
+    NSURL *url = [mainBundle URLForResource:@"scan" withExtension:@"jpg"];
+
+    
 
     // Do any additional setup after loading the view, typically from a nib.
 //    [self configUI];
@@ -53,12 +61,24 @@
 //            [self testThread];
 //            [self testVideoPlayer];
 //            [self testabs];
-            [self testVoiceToText];
+//            [self testVoiceToText];
+//            [self testDocumentVC];
+            [self testTableView];
         }
     }];
     [self.view addSubview:button];
 //    [self testTextField];
     [self configTestView];
+}
+
+- (void)testTableView {
+    TestTableVC *vc = [[TestTableVC alloc]init];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)testDocumentVC{
+    UIDocumentInteractionController *vc = [UIDocumentInteractionController interactionControllerWithURL:[NSURL URLWithString:@"http://b.xiazaicc.com/down2/ttgdsxdlb_downcc.com.zip"]];
+    [vc presentPreviewAnimated:YES];
 }
 
 -(void)testVoiceToText{
